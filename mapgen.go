@@ -59,4 +59,16 @@ func (slice {{.TypeName}}Slice) Map(fn {{.TypeName}}MapFunc) []interface{} {
 	}
 	return output
 }
+
+type {{.TypeName}}FilterFunc func({{.TypeName}}) bool
+
+func (slice {{.TypeName}}Slice) Filter(fn {{.TypeName}}FilterFunc) {{.TypeName}}Slice {
+	var output {{.TypeName}}Slice
+	for _, item := range slice {
+		if fn(item) {
+			output = append(output, item)
+		}
+	}
+	return output
+}
 `))

@@ -11,3 +11,15 @@ func (slice CarSlice) Map(fn CarMapFunc) []interface{} {
 	}
 	return output
 }
+
+type CarFilterFunc func(Car) bool
+
+func (slice CarSlice) Filter(fn CarFilterFunc) CarSlice {
+	var output CarSlice
+	for _, item := range slice {
+		if fn(item) {
+			output = append(output, item)
+		}
+	}
+	return output
+}
