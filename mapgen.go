@@ -71,4 +71,12 @@ func (slice {{.TypeName}}Slice) Filter(fn {{.TypeName}}FilterFunc) {{.TypeName}}
 	}
 	return output
 }
+
+type {{.TypeName}}EachFunc func({{.TypeName}})
+
+func (slice {{.TypeName}}Slice) Each(fn {{.TypeName}}EachFunc) {
+	for _, item := range slice {
+		fn(item)
+	}
+}
 `))

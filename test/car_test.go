@@ -46,3 +46,21 @@ func TestFilterCar(t *testing.T) {
 		}
 	}
 }
+
+func TestEachCar(t *testing.T) {
+	var cars CarSlice
+	cars = append(cars, Car{"BMW", "white"})
+	cars = append(cars, Car{"VW", "Black"})
+	cars = append(cars, Car{"Seat", "Black"})
+	cars = append(cars, Car{"VW", "silver"})
+	cars = append(cars, Car{"Ford", "brown"})
+
+	i := 0
+	cars.Each(func(car Car) {
+		i++
+	})
+
+	if len(cars) != i {
+		t.Errorf("i should be %v, but was %v", len(cars), i)
+	}
+}

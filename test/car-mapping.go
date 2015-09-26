@@ -23,3 +23,11 @@ func (slice CarSlice) Filter(fn CarFilterFunc) CarSlice {
 	}
 	return output
 }
+
+type CarEachFunc func(Car)
+
+func (slice CarSlice) Each(fn CarEachFunc) {
+	for _, item := range slice {
+		fn(item)
+	}
+}
