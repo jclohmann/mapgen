@@ -3,9 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/jclohmann/mapgen"
 	"go/parser"
 	"go/token"
-	"mapgen"
 	"path/filepath"
 	"regexp"
 )
