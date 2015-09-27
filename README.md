@@ -37,4 +37,3 @@ brands := cars.Map(func(car Car) interface{} {
 Todo
 ====
 * go generate-Integration
-* mapping-functions with typed output

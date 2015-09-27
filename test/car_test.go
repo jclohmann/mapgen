@@ -12,7 +12,7 @@ func TestMapCar(t *testing.T) {
 	cars = append(cars, Car{"VW", "silver"})
 	cars = append(cars, Car{"Ford", "brown"})
 
-	names := cars.Map(func(car Car) interface{} {
+	names := cars.MapToString(func(car Car) string {
 		return car.brand
 	})
 

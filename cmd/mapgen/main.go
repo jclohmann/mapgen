@@ -8,6 +8,7 @@ import (
 	"go/token"
 	"path/filepath"
 	"regexp"
+	"strings"
 )
 
 func main() {
@@ -26,17 +27,22 @@ func main() {
 		return
 	}
 
-	commentRegexp := regexp.MustCompile("\\+mapgen[ ]*(type=([a-zA-Z0-9]+))")
+	commentRegexp := regexp.MustCompile("\\+mapgen[ ]*type=([a-zA-Z0-9]+)([ ]*(targets=(.+))?)")
 	for _, comment := range sourceFile.Comments {
 		text := comment.Text()
 		match := commentRegexp.FindStringSubmatch(text)
+
 		if len(match) > 0 {
-			typeName := match[2]
+			typeName := match[1]
 			if typeName == "" {
 				fmt.Println("Missing type")
 				return
 			}
-			mg := mapgen.NewMapGen(filepath.Dir(*source), sourceFile.Name.String(), typeName)
+			var targets []string
+			if len(match) > 3 {
+				targets = strings.Split(match[4], ",")
+			}
+			mg := mapgen.NewMapGen(filepath.Dir(*source), sourceFile.Name.String(), typeName, targets)
 			err := mg.Generate()
 			if err != nil {
 				fmt.Println(err)
